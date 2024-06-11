@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mailbox Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("9gydduA26qP4Do9xm"); // Replace with your EmailJS user ID
+
+        function sendEmail() {
+            var form = document.getElementById('emailForm');
+            var formData = new FormData(form);
+
+            var emailParams = {
+                to_name: "marshall12340@gmail.com", // Replace with recipient email
+                from_name: formData.get('email'),
+                subject: formData.get('subject'),
+                message_html: formData.get('body')
+            };
+
+            emailjs.send("service_xjqgy6v", "template_xg22lnh", emailParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                
+                // Send auto-reply email
+                sendAutoReply(emailParams.from_name, emailParams.subject, emailParams.message_html);
+
+                // Redirect to the acknowledgment page
+                window.location.href = 'acknowledgment.html';
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+        }
+
+        function sendAutoReply(fromName, subject, messageHtml) {
+            var autoReplyParams = {
+                from_name: fromName,
+                subject: subject,
+                message_html: messageHtml
+            };
+
+            emailjs.send("service_xjqgy6v", "template_j7el58d", autoReplyParams)
+            .then(function(response) {
+                console.log('Auto-reply sent successfully!', response.status, response.text);
+            }, function(error) {
+                console.log('Failed to send auto-reply.', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <form id="emailForm">
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+                <ul>
+                    <li>Business Loan Application Assistance - $200</a></li>
+                    <li>Business Grant Application Assistance - $150</a></li>
+                    <li>Professional Website Building - $500</a></li>
+                    <li>Professional Email Creation - $50</a></li>
+                    <li>Professional Phone Number Creation - $75</a></li>
+                </ul>
+<p>Please type in or copy and paste the service you would like assistance with below.</p>
+            <label for="body">Message:</label>
+            <textarea id="body" name="body" rows="10" required></textarea>
+            
+            <button type="button" onclick="sendEmail()">Send</button>
+        </form>
+    </div>
+</body>
+</html>
