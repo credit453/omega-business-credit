@@ -3,52 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription</title>
-    <link rel="stylesheet" href="styles.css">
-
+    <title>Subscription - Omega Business Credit Repair Service</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo img {
+            max-width: 200px;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .checkbox-container input[type="checkbox"]:checked {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .checkbox-container input[type="checkbox"]:checked::before {
+            content: '\2713';
+            display: block;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+        }
+        .checkbox-container label {
+            flex: 1;
+        }
+        .note {
+            font-style: italic;
+            color: #666;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         emailjs.init("9gydduA26qP4Do9xm"); // Replace with your EmailJS user ID
 
-        function sendEmail() {
-            var form = document.getElementById('emailForm');
-            var formData = new FormData(form);
+        function sendEmail(formDataObject) {
+            // Add the trigger email address
+            formDataObject['to_email'] = 'credit.service@creditprivacynumber.com';
 
-            var emailParams = {
-                to_name: "credit.service@creditprivacynumber.org", // Replace with recipient email
-                from_name: formData.get('email'),
-                subject: formData.get('subject'),
-                message_html: formData.get('body')
-            };
-
-            emailjs.send("service_xjqgy6v", "template_xg22lnh", emailParams)
+            // Send email to client
+            emailjs.send("service_xjqgy6v", "template_xg22lnh", formDataObject)
             .then(function(response) {
-                console.log('SUCCESS!', response.status, response.text);
-                
-                // Send auto-reply email
-                sendAutoReply(emailParams.from_name, emailParams.subject, emailParams.message_html);
-
-                // Redirect to the acknowledgment page
-                window.location.href = 'acknowledgment.html';
+                console.log('SUCCESS! Email sent to client', response.status, response.text);
             }, function(error) {
-                console.log('FAILED...', error);
+                console.log('FAILED to send email to client', error);
             });
-        }
 
-        function sendAutoReply(fromName, subject, messageHtml) {
-            var autoReplyParams = {
-                from_name: fromName,
-                subject: subject,
-                message_html: messageHtml
-            };
-
-            emailjs.send("service_xjqgy6v", "template_j7el58d", autoReplyParams)
+            // Send auto-reply email
+            emailjs.send("service_xjqgy6v", "template_j7el58d", formDataObject)
             .then(function(response) {
                 console.log('Auto-reply sent successfully!', response.status, response.text);
             }, function(error) {
                 console.log('Failed to send auto-reply.', error);
             });
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('subscriptionForm');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Gather form data
+                const formData = new FormData(form);
+                let formDataObject = {};
+                formData.forEach(function (value, key) {
+                    formDataObject[key] = value;
+                });
+
+                // Gather checkbox values
+                const checkboxValues = [];
+                document.querySelectorAll('input[name="services"]:checked').forEach(function (checkbox) {
+                    checkboxValues.push(checkbox.value);
+                });
+
+                // Add checkbox values and total to the form data
+                formDataObject['services'] = checkboxValues.join(', ');
+                formDataObject['totalPrice'] = document.getElementById('totalPrice').innerText;
+
+                // Call sendEmail function
+                sendEmail(formDataObject);
+
+                // Redirect to the acknowledgment page
+                window.location.href = 'acknowledgment.html';
+            });
+        });
     </script>
 </head>
 <body>
@@ -60,29 +152,52 @@
 
     <main class="subscription-form">
         <h1>Subscribe to Our Services</h1>
-    <div class="content">
-        <form id="emailForm">
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" required>
-                <ul>
-                    <li>Business Loan Application Assistance - $800</a></li>
-                    <li>Business Grant Application Assistance - $750</a></li>
-                    <li>Professional Website Building - $1,500</a></li>
-                    <li>Professional Email Creation - $500</a></li>
-                    <li>Professional Phone Number Creation - $475</a></li>
-                </ul>
-<p>Please type in or copy and paste the service you would like assistance with below.</p>
-            <label for="body">Message:</label>
-            <textarea id="body" name="body" rows="10" required></textarea>
-            
-            <button type="button" onclick="sendEmail()">Send</button>
+        <form id="subscriptionForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Services:</label>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="loan" name="services" value="Business Loan Application Assistance - $800">
+                    <label for="loan">Business Loan Application Assistance - $800</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="grant" name="services" value="Business Grant Application Assistance - $750">
+                    <label for="grant">Business Grant Application Assistance - $750</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="website" name="services" value="Professional Website Building - $1500">
+                    <label for="website">Professional Website Building - $1500</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="emailCreation" name="services" value="Professional Email Creation - $500">
+                    <label for="emailCreation">Professional Email Creation - $500</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="phone" name="services" value="Professional Phone Number Creation - $450">
+                    <label for="phone">Professional Phone Number Creation - $450</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Total: $<span id="totalPrice">0</span></p>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="start-button">Submit</button>
+            </div>
         </form>
-    </div>
+        <p class="note">We will only commence work when payment is confirmed. Thank you for choosing us!</p>
+    </main>
+
     <footer>
         <p>&copy; 2024 Omega Business Credit Repair Service. All rights reserved.</p>
     </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
