@@ -3,70 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription - Omega Business Credit Repair Service</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Mailbox Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        (function(){
-            emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
-        })();
+        emailjs.init("9gydduA26qP4Do9xm"); // Replace with your EmailJS user ID
+
+        function sendEmail() {
+            var form = document.getElementById('emailForm');
+            var formData = new FormData(form);
+
+            var emailParams = {
+                to_name: "marshall12340@gmail.com", // Replace with recipient email
+                from_name: formData.get('email'),
+                subject: formData.get('subject'),
+                message_html: formData.get('body')
+            };
+
+            emailjs.send("service_xjqgy6v", "template_xg22lnh", emailParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                
+                // Send auto-reply email
+                sendAutoReply(emailParams.from_name, emailParams.subject, emailParams.message_html);
+
+                // Redirect to the acknowledgment page
+                window.location.href = 'acknowledgment.html';
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+        }
+
+        function sendAutoReply(fromName, subject, messageHtml) {
+            var autoReplyParams = {
+                from_name: fromName,
+                subject: subject,
+                message_html: messageHtml
+            };
+
+            emailjs.send("service_xjqgy6v", "template_j7el58d", autoReplyParams)
+            .then(function(response) {
+                console.log('Auto-reply sent successfully!', response.status, response.text);
+            }, function(error) {
+                console.log('Failed to send auto-reply.', error);
+            });
+        }
     </script>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="logo.png" alt="Omega Business Credit Repair Service" id="logo">
-        </div>
-    </header>
-
-    <main class="subscription-form">
-        <h1>Subscribe to Our Services</h1>
-        <form id="subscriptionForm">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label>Services:</label>
-                <div>
-                    <input type="checkbox" id="loan" name="services" value="Business Loan Application Assistance - $200">
-                    <label for="loan">Business Loan Application Assistance - $200</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="grant" name="services" value="Business Grant Application Assistance - $150">
-                    <label for="grant">Business Grant Application Assistance - $150</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="website" name="services" value="Professional Website Building - $500">
-                    <label for="website">Professional Website Building - $500</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="emailCreation" name="services" value="Professional Email Creation - $50">
-                    <label for="emailCreation">Professional Email Creation - $50</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="phone" name="services" value="Professional Phone Number Creation - $75">
-                    <label for="phone">Professional Phone Number Creation - $75</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <p>Total: $<span id="totalPrice">0</span></p>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="start-button">Submit</button>
-            </div>
+    <div class="content">
+        <form id="emailForm">
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+                <ul>
+                    <li>Business Loan Application Assistance - $200</a></li>
+                    <li>Business Grant Application Assistance - $150</a></li>
+                    <li>Professional Website Building - $500</a></li>
+                    <li>Professional Email Creation - $50</a></li>
+                    <li>Professional Phone Number Creation - $75</a></li>
+                </ul>
+<p>Please type in or copy and paste the service you would like assistance with below.</p>
+            <label for="body">Message:</label>
+            <textarea id="body" name="body" rows="10" required></textarea>
+            
+            <button type="button" onclick="sendEmail()">Send</button>
         </form>
-        <p class="note">We will only commence work when payment is confirmed. Thank you for choosing us!</p>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Omega Business Credit Repair Service. All rights reserved.</p>
-    </footer>
-
-    <script src="scripts.js"></script>
+    </div>
 </body>
 </html>
