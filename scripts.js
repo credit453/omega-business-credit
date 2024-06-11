@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalPriceElement = document.getElementById('totalPrice');
     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
     const prices = {
-        loan: 200,
-        grant: 150,
-        website: 500,
-        emailCreation: 50,
-        phone: 75
+        loan: 800,
+        grant: 750,
+        website: 1500,
+        emailCreation: 500,
+        phone: 450
     };
 
     function updateTotalPrice() {
