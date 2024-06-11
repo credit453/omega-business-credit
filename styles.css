@@ -15,7 +15,7 @@ header {
 
 .logo img {
     width: 150px;
-    animation: logoAnimation 3s infinite;
+    animation: logoAnimation 5s infinite;
 }
 
 @keyframes logoAnimation {
