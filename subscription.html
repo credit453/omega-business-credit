@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription - Omega Business Credit Repair Service</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Omega Business Credit Repair Service" id="logo">
+        </div>
+    </header>
+
+    <main class="subscription-form">
+        <h1>Subscribe to Our Services</h1>
+        <form id="subscriptionForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Services:</label>
+                <div>
+                    <input type="checkbox" id="loan" name="services" value="Business Loan Application Assistance - $200">
+                    <label for="loan">Business Loan Application Assistance - $200</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="grant" name="services" value="Business Grant Application Assistance - $150">
+                    <label for="grant">Business Grant Application Assistance - $150</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="website" name="services" value="Professional Website Building - $500">
+                    <label for="website">Professional Website Building - $500</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="emailCreation" name="services" value="Professional Email Creation - $50">
+                    <label for="emailCreation">Professional Email Creation - $50</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="phone" name="services" value="Professional Phone Number Creation - $75">
+                    <label for="phone">Professional Phone Number Creation - $75</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Total: $<span id="totalPrice">0</span></p>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="start-button">Submit</button>
+            </div>
+        </form>
+        <p class="note">We will only commence work when payment is confirmed. Thank you for choosing us!</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Omega Business Credit Repair Service. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
