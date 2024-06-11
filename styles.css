@@ -188,6 +188,13 @@ input[type="text"], input[type="email"] {
     transition: all 0.3s ease;
     width: 100%;
 }
+        .message {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
         .content {
             background-color: white;
             padding: 20px;
