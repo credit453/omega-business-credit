@@ -4,52 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscription</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 500px;
-        }
-        form {
-            margin-top: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         emailjs.init("9gydduA26qP4Do9xm"); // Replace with your EmailJS user ID
@@ -96,6 +52,14 @@
     </script>
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Omega Business Credit Repair Service" id="logo">
+        </div>
+    </header>
+
+    <main class="subscription-form">
+        <h1>Subscribe to Our Services</h1>
     <div class="content">
         <form id="emailForm">
             <label for="email">Your Email:</label>
@@ -117,5 +81,8 @@
             <button type="button" onclick="sendEmail()">Send</button>
         </form>
     </div>
+    <footer>
+        <p>&copy; 2024 Omega Business Credit Repair Service. All rights reserved.</p>
+    </footer>
 </body>
 </html>
