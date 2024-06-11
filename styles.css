@@ -15,14 +15,14 @@ header {
 
 .logo img {
     width: 150px;
-    animation: logoAnimation 3s infinite;
+    animation: logoAnimation 7s infinite;
 }
 
 @keyframes logoAnimation {
     0%, 100% {
         transform: rotate(0deg);
     }
-    50% {
+    100% {
         transform: rotate(360deg);
     }
 }
