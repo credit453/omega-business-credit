@@ -86,7 +86,7 @@ main {
 }
 
 .service-section img {
-    width: 100%;
+    width: 90%;
     height: auto;
     border-radius: 8px;
     transition: transform 0.3s ease-in-out;
@@ -167,7 +167,7 @@ main.subscription-form {
     text-align: left;
 }
 input[type="text"], input[type="email"] {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -201,7 +201,7 @@ input[type="text"], input[type="email"] {
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
         }
         form {
             margin-top: 20px;
@@ -212,7 +212,7 @@ input[type="text"], input[type="email"] {
             font-weight: bold;
         }
         input, textarea {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
