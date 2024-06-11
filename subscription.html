@@ -197,6 +197,59 @@
     <footer>
         <p>&copy; 2024 Omega Business Credit Repair Service. All rights reserved.</p>
     </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('subscriptionForm');
+        const totalPriceElement = document.getElementById('totalPrice');
+
+        // Function to calculate total price
+        function calculateTotalPrice() {
+            let totalPrice = 0;
+            document.querySelectorAll('input[name="services"]:checked').forEach(function (checkbox) {
+                totalPrice += parseFloat(checkbox.value.split(' - ')[1]);
+            });
+            totalPriceElement.innerText = totalPrice.toFixed(2);
+        }
+
+        // Event listener for checkboxes
+        document.querySelectorAll('input[name="services"]').forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                calculateTotalPrice();
+            });
+        });
+
+        // Event listener for form submission
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Gather form data
+            const formData = new FormData(form);
+            let formDataObject = {};
+            formData.forEach(function (value, key) {
+                formDataObject[key] = value;
+            });
+
+            // Gather checkbox values
+            const checkboxValues = [];
+            document.querySelectorAll('input[name="services"]:checked').forEach(function (checkbox) {
+                checkboxValues.push(checkbox.value);
+            });
+
+            // Add checkbox values and total to the form data
+            formDataObject['services'] = checkboxValues.join(', ');
+            formDataObject['totalPrice'] = totalPriceElement.innerText;
+
+            // Call sendEmail function
+            sendEmail(formDataObject);
+
+            // Redirect to the acknowledgment page
+            window.location.href = 'acknowledgment.html';
+        });
+
+        // Initial calculation of total price
+        calculateTotalPrice();
+    });
+</script>
 
     <script src="scripts.js"></script>
 </body>
